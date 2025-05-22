@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { Snackbar } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomInput from '../../components/UI/CustomInput';
 import Modal from '../../components/Modal';
 import { validationSchemaResetPassword } from '../../helpers/validation';
-import { progressColors } from '../../constants';
 import { IFormInputs, ISnackbar } from '../../interfaces';
 import { IRegistrationProps } from './interface';
 import useAction from '../../hooks/useAction';
+import { progressColors } from '../../constants';
 import {
   StyledForm,
   StyledLinearProgress,
   StyledLinearWrapper,
   StyledProgressCaption,
 } from './style';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Snackbar } from '@mui/material';
 
 export interface ISubmit {
   password: string;
@@ -93,10 +93,6 @@ const ResetPassword = ({ handleClose }: IRegistrationProps) => {
     }
   };
 
-  useEffect(() => {
-    setPasswordStrength(calculatePasswordStrength(passwordValue));
-  }, [passwordValue]);
-
   const calculatePasswordStrength = (password: string) => {
     let strength = 0;
     if (password.length >= PASSWORD_MIN_LENGTH) strength += PASSWORD_STRENGTH_WEIGHTS.LENGTH;
@@ -108,6 +104,10 @@ const ResetPassword = ({ handleClose }: IRegistrationProps) => {
       strength += PASSWORD_STRENGTH_WEIGHTS.SPECIAL_CHARACTER;
     return strength;
   };
+
+  useEffect(() => {
+    setPasswordStrength(calculatePasswordStrength(passwordValue));
+  }, [passwordValue]);
 
   return (
     <>
