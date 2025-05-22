@@ -1,0 +1,7 @@
+const passwordEnums = {
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  RESET_PASSWORD_SUCCESS: 'RESET_PASSWORD_SUCCESS',
+  RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR',
+};
+
+export default passwordEnums;
